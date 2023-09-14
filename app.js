@@ -1,4 +1,4 @@
-const { token } = require("./utils/config");
+const { token } = require("./src/utils/config");
 const { Client, Events, GatewayIntentBits } = require("discord.js");
 
 
