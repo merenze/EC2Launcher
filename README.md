@@ -17,16 +17,34 @@ This project is in early development. You are welcome to try it out, but expect 
 1. [Create a Discord application](https://discord.com/developers/docs/getting-started#step-1-creating-an-app)
    and [a bot user](https://discord.com/developers/docs/getting-started#configuring-your-bot) for the app.
 2. Generate a bot token for the user. Copy this token and store it securely.
-3. Clone this repository.
+3. [Create an IAM user](https://docs.aws.amazon.com/IAM/latest/UserGuide/introduction.html).
+   At minimum, this user needs the `StartInstances` and `StopInstances` permissions for EC2.
+   Generate an access key pair, and store the secret token somewhere securely.
+4. Clone this repository.
    ```bash
    git clone git@github.com:merenze/EC2Launcher.git
    cd EC2Launcher
    ```
-4. Configure your application. Copy config.example.yml to config.yml and paste your bot's token into the `token` field.
+5. Configure your application. Copy config.example.yml to config.yml.
+   Paste your bot's token into the `token` field.
+   Paste your IAM user's access key ID into the `accessKeyId` field.
+   Paste your IAM user's secret access key into the `accessKeySecret` field.
+   Enter your AWS region into the `region` field.
    ```yaml
    token: "your-bot-token"
+   accessKeyId: "your-access-key-id"
+   accessKeySecret: "your-secret-access-key"
+   region: "us-east-1"
    ```
-5. Build and run the application with Docker.
+   Under the `instances` field, name each instance with a key and provide the ID for that instance.
+   ```yaml
+   instances:
+     uno:
+       id: `my-ec2-instance-id-1`
+     dos:
+       id: `my-ec2-instance-id-2`
+   ```
+6. Build and run the application with Docker.
    ```bash
    docker build -t ec2starter .
    docker run -d ec2starter
@@ -36,10 +54,10 @@ This project is in early development. You are welcome to try it out, but expect 
    npm i
    npm start
    ```
-6. Invite your bot to your server, with permission to read and send messages.
-7. In a channel your bot has permission to view, execute `/start`,
+7. Invite your bot to your server, with permission to read and send messages.
+8. In a channel your bot has permission to view, execute `/start <instance key>`,
    with the `instance` option set to a key defined in your config.
-   Your bot should respond with `Found EC2 instance for key '<instance>'`
+   Your bot should start the EC2 instance.
 
 
 ## Contributing
