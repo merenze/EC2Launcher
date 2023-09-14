@@ -1,15 +1,25 @@
-const { token } = require("./src/utils/config");
+const path = require("path");
 const { Client, Events, GatewayIntentBits } = require("discord.js");
-
+const { token, appId, guildId } = require(path.join(__dirname, "src/utils/config"));
+const startCommand = require(path.join(__dirname, "src/commands/start"));
+const deployCommands = require(path.join(__dirname, "src/utils/deploy-commands"));
 
 // Create a new client instance
 const client = new Client({ intents: [GatewayIntentBits.Guilds] });
 
-// When the client is ready, run this code (only once)
-// We use 'c' for the event parameter to keep it separate from the already defined 'client'
-client.once(Events.ClientReady, (c) => {
-  console.log(`Ready! Logged in as ${c.user.tag}`);
-});
+const commands = {
+  start: startCommand,
+};
 
 // Log in to Discord with your client's token
 client.login(token);
+
+// Deploy commands
+deployCommands();
+
+client.on(Events.InteractionCreate, async (interaction) => {
+  console.log(interaction);
+  if (commands[interaction.commandName]) {
+    await commands[interaction.commandName].execute(interaction);
+  }
+});
