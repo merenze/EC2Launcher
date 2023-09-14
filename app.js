@@ -1,11 +1,15 @@
-const http = require('http');
-const hostname = '0.0.0.0';
-const port = 3000;
+const { token } = require("./utils/config");
+const { Client, Events, GatewayIntentBits } = require("discord.js");
 
-const server = http.createServer((req, res) => {
-    res.statusCode = 200;
-    res.setHeader('Content-Type', 'text/plain');
-    res.end('Hello, World!');
+
+// Create a new client instance
+const client = new Client({ intents: [GatewayIntentBits.Guilds] });
+
+// When the client is ready, run this code (only once)
+// We use 'c' for the event parameter to keep it separate from the already defined 'client'
+client.once(Events.ClientReady, (c) => {
+  console.log(`Ready! Logged in as ${c.user.tag}`);
 });
 
-server.listen(port, hostname, () => console.log(`Running at http://${hostname}:${port}`));
+// Log in to Discord with your client's token
+client.login(token);

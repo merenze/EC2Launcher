@@ -16,5 +16,9 @@
   "bugs": {
     "url": "https://github.com/merenze/EC2Launcher/issues"
   },
-  "homepage": "https://github.com/merenze/EC2Launcher#readme"
+  "homepage": "https://github.com/merenze/EC2Launcher#readme",
+  "dependencies": {
+    "discord.js": "^14.13.0",
+    "js-yaml": "^4.1.0"
+  }
 }
