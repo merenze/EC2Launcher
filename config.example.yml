@@ -1,5 +1,13 @@
+# -----------------------------------------------------
 # Configuration file for your bot
 # Copy this file to config.yml and update the values.
+# -----------------------------------------------------
 
-# Your bot's authentication token, provided by Discord.
+# Your bot's authentication token, provided by Discord
 token: "your-bot-token"
+
+# Your bot's application's ID
+appId: "your-app-id"
+
+# Your Discord server's ID
+guildId: "your-guild-id"
