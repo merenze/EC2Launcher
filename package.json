@@ -18,6 +18,7 @@
   },
   "homepage": "https://github.com/merenze/EC2Launcher#readme",
   "dependencies": {
+    "aws-sdk": "^2.1458.0",
     "discord.js": "^14.13.0",
     "js-yaml": "^4.1.0"
   }
