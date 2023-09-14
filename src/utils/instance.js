@@ -33,19 +33,44 @@ const getCredentials = (key) => {
 };
 
 module.exports = {
-    /**
-     * Get the state of the instance.
-     * @param {string} key Key for the instance, defined in the config
-     * @return {Promise<string>} Promise that resolves to the instance's state.
-     */
-    state: async (key) => {
-        const instanceConfig = getInstanceConfig(key);
-        const ec2 = new AWS.EC2(getCredentials(key));
-        return ec2.describeInstances({ InstanceIds: [instanceConfig.id] })
-            .promise()
-            .then(data => {
-                const instance = data.Reservations[0]?.Instances[0];
-                return instance.State.Name;
-            });
-    },
+  /**
+   * Get the state of the instance.
+   * @param {string} key Key for the instance, defined in the config
+   * @return {Promise<string>} Promise that resolves to the instance's state.
+   */
+  state: async (key) => {
+    const instanceConfig = getInstanceConfig(key);
+    const ec2 = new AWS.EC2(getCredentials(key));
+    return ec2
+      .describeInstances({ InstanceIds: [instanceConfig.id] })
+      .promise()
+      .then((data) => {
+        const instance = data.Reservations[0]?.Instances[0];
+        return instance.State.Name;
+      });
+  },
+
+  /**
+   * Attempt to start an instance.
+   * @param {} key Key for the instance, defined in the config
+   * @returns {Promise}
+   */
+  start: async (key) => {
+    const instanceConfig = getInstanceConfig(key);
+    const ec2 = new AWS.EC2(getCredentials(key));
+
+    return ec2.startInstances({ InstanceIds: [instanceConfig.id] }).promise();
+  },
+
+  /**
+   * Attempt to stop an instance.
+   * @param {} key Key for the instance, defined in the config
+   * @returns {Promise}
+   */
+  stop: async (key) => {
+    const instanceConfig = getInstanceConfig(key);
+    const ec2 = new AWS.EC2(getCredentials(key));
+
+    return ec2.stopInstances({ InstanceIds: [instanceConfig.id] }).promise();
+  },
 };

@@ -1,11 +1,11 @@
 const path = require("path");
 const { SlashCommandBuilder } = require("discord.js");
 const { instances } = require(path.join(__dirname, "../utils/config"));
-const { start } = require(path.join(__dirname, "../utils/instance.js"));
+const { stop } = require(path.join(__dirname, "../utils/instance.js"));
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("start")
+    .setName("stop")
     .setDescription("Starts the EC2 instance.")
     .setDMPermission(false)
     .addStringOption((option) =>
@@ -24,17 +24,16 @@ module.exports = {
     const instance = instances[key];
     // Instance not defined in config
     if (!instance) {
-      return interaction.reply(`No EC2 instance configured for key '${key}'`);
+      return interaction.reply(`No EC2 instance configured for key '${key}'`, {
+        ephemeral: true,
+      });
     }
-
-    interaction.reply(`Attempting to start ${key}`);
-    
     // Instance defined in config
-    start(key)
-      .then(() => interaction.editReply(`Started ${key}`))
+    stop(key)
+      .then(() => interaction.reply(`Stopped '${key}`))
       .catch((err) => {
         console.error(err);
-        interaction.editReply(`Failed: ${err.message}`);
-    })
+        interaction.reply(`Failed: ${err.message}`);
+      });
   },
 };
