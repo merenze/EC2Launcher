@@ -1,6 +1,6 @@
 const path = require("path");
 const { Client, Events, GatewayIntentBits } = require("discord.js");
-const { token, appId, guildId } = require(path.join(__dirname, "src/utils/config"));
+const { token } = require(path.join(__dirname, "src/utils/config"));
 const startCommand = require(path.join(__dirname, "src/commands/start"));
 const deployCommands = require(path.join(__dirname, "src/utils/deploy-commands"));
 
@@ -18,7 +18,6 @@ client.login(token);
 deployCommands();
 
 client.on(Events.InteractionCreate, async (interaction) => {
-  console.log(interaction);
   if (commands[interaction.commandName]) {
     await commands[interaction.commandName].execute(interaction);
   }

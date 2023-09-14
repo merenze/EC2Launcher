@@ -1,7 +1,7 @@
 const path = require("path");
 const fs = require("fs");
 const { REST, Routes } = require("discord.js");
-const { token, appId, guildId } = require(path.join(__dirname, "config.js"));
+const { token, appId } = require(path.join(__dirname, "config.js"));
 
 const commandDir = path.join(__dirname, "../commands");
 
@@ -16,6 +16,6 @@ module.exports = async () => {
     const rest = new REST().setToken(token);
 
     rest
-        .put(Routes.applicationGuildCommands(appId, guildId), { body: commands })
+        .put(Routes.applicationCommands(appId), { body: commands })
         .catch(error => console.error(error));
 };
