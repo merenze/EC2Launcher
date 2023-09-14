@@ -36,6 +36,10 @@ This project is in early development. You are welcome to try it out, but expect 
    npm i
    npm start
    ```
+6. Invite your bot to your server, with permission to read and send messages.
+7. In a channel your bot has permission to view, execute `/start`.
+   Your bot should respond with `Hello, <your-username>!`
+
 
 ## Contributing
 
