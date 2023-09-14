@@ -1,6 +1,6 @@
 # EC2 Starter
 
-EC2 Launcher is a Discord bot which starts your stopped EC2 instance on command.
+EC2 Starter is a Discord bot which starts your stopped EC2 instance on command.
 
 The goal is to allow my friends to start our Minecraft servers at will,
 so they don't have to ask me for help.

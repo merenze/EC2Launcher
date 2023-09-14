@@ -1,5 +1,5 @@
 {
-  "name": "ec2launcher",
+  "name": "ec2starter",
   "version": "1.0.0",
   "description": "Discord bot for launch an EC2 instance",
   "main": "app.js",
