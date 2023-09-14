@@ -31,10 +31,10 @@ module.exports = {
     
     // Instance defined in config
     start(key)
-      .then(() => interaction.editReply(`Started ${key}`))
+      .then(() => interaction.editReply(`Started '${key}'`))
       .catch((err) => {
         console.error(err);
-        interaction.editReply(`Failed: ${err.message}`);
+        interaction.editReply(`Failed to start '${key}': ${err.message}`);
     })
   },
 };

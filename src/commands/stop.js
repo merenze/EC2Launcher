@@ -6,7 +6,7 @@ const { stop } = require(path.join(__dirname, "../utils/instance.js"));
 module.exports = {
   data: new SlashCommandBuilder()
     .setName("stop")
-    .setDescription("Starts the EC2 instance.")
+    .setDescription("Stops the EC2 instance.")
     .setDMPermission(false)
     .addStringOption((option) =>
       option
@@ -28,12 +28,14 @@ module.exports = {
         ephemeral: true,
       });
     }
-    // Instance defined in config
+
+    interaction.reply(`Attempting to stop '${key}'`);
+
     stop(key)
-      .then(() => interaction.reply(`Stopped '${key}`))
+      .then(() => interaction.editReply(`Stopped '${key}`))
       .catch((err) => {
         console.error(err);
-        interaction.reply(`Failed: ${err.message}`);
+        interaction.editReplay(`Failed to stop '${key}': ${err.message}`);
       });
   },
 };
