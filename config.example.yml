@@ -11,3 +11,8 @@ appId: "your-app-id"
 
 # Your Discord server's ID
 guildId: "your-guild-id"
+
+# Your EC2 instances, defined by a friendly key and the instance information.
+instances:
+  instance1: "TODO"
+  instance2: "TODO"
