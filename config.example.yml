@@ -3,6 +3,10 @@
 # Copy this file to config.yml and update the values.
 # -----------------------------------------------------
 
+#-------------------------------------------------------
+# Discord settings
+# ------------------------------------------------------
+
 # Your bot's authentication token, provided by Discord
 token: "your-bot-token"
 
@@ -12,7 +16,30 @@ appId: "your-app-id"
 # Your Discord server's ID
 guildId: "your-guild-id"
 
+# -------------------------------------------------------
+# AWS settings
+# -------------------------------------------------------
+
+# Your IAM user's access key ID
+accessKeyId: "your-access-key-id"
+
+# Your IAM user's secret access key
+accessKeySecret: "your-secret-access-key"
+
+# Your AWS region
+region: "your-aws-region"
+
+# -----------------------------------------------------------------------------------
 # Your EC2 instances, defined by a friendly key and the instance information.
+# You can also define AWS accessKeyId, accessKeySecret, and region for each instance.
+# If you define them here, they will override those defined at the root level.
+# -----------------------------------------------------------------------------------
+
 instances:
-  instance1: "TODO"
-  instance2: "TODO"
+#    instanceKey:
+#      id:
+#      accessKeyId:
+#      accessKeySecret:
+#      region:
+  instance1:
+    id: "your-instance-id"

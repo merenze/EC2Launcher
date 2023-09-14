@@ -12,10 +12,10 @@ module.exports = async () => {
     const { data } = require(path.join(commandDir, file));
     commands.push(data);
   });
-    
-    const rest = new REST().setToken(token);
 
-    rest
-        .put(Routes.applicationCommands(appId), { body: commands })
-        .catch(error => console.error(error));
+  const rest = new REST().setToken(token);
+
+  rest
+    .put(Routes.applicationCommands(appId), { body: commands })
+    .catch((error) => console.error(error));
 };
