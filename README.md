@@ -37,8 +37,9 @@ This project is in early development. You are welcome to try it out, but expect 
    npm start
    ```
 6. Invite your bot to your server, with permission to read and send messages.
-7. In a channel your bot has permission to view, execute `/start`.
-   Your bot should respond with `Hello, <your-username>!`
+7. In a channel your bot has permission to view, execute `/start`,
+   with the `instance` option set to a key defined in your config.
+   Your bot should respond with `Found EC2 instance for key '<instance>'`
 
 
 ## Contributing
