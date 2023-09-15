@@ -32,6 +32,31 @@ const getCredentials = (key) => {
     };
 };
 
+/**
+ * Recursively start instances and their dependencies
+ * @param {string} key Key of the instance
+ * @param {string[]} visited Keys of visited instances
+ * @return {Promise}
+ */
+const startRec = async (key, visited) => {
+    if (visited.includes(key)) {
+        throw new Error("Instance configuration: circular dependency");
+    }
+
+    visited.push(key);
+
+    const instanceConfig = getInstanceConfig(key);
+    const ec2 = new AWS.EC2(getCredentials(key));
+
+    if (instanceConfig.depend) {
+        await Promise.all(instanceConfig.depend.map(async (k) =>
+            await startRec(k, visited)
+        ));
+    }
+
+    return ec2.startInstances({ InstanceIds: [instanceConfig.id] }).promise();
+};
+
 module.exports = {
   /**
    * Get the state of the instance.
@@ -55,12 +80,7 @@ module.exports = {
    * @param {} key Key for the instance, defined in the config
    * @returns {Promise}
    */
-  start: async (key) => {
-    const instanceConfig = getInstanceConfig(key);
-    const ec2 = new AWS.EC2(getCredentials(key));
-
-    return ec2.startInstances({ InstanceIds: [instanceConfig.id] }).promise();
-  },
+  start: async (key) => startRec(key, []),
 
   /**
    * Attempt to stop an instance.

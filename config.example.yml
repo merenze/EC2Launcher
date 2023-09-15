@@ -36,10 +36,22 @@ region: "your-aws-region"
 # -----------------------------------------------------------------------------------
 
 instances:
+#    # The name you will use in the start command
 #    instanceKey:
+#
+#      # The ID for the EC2 instance
 #      id:
+#
+#      # Keys to instances which must be running before this instance
+#      depend: [otherInstance, someOtherInstance]
+#
+#      # The access key ID for the IAM user, if overriding the default
 #      accessKeyId:
+#
+#      # The secret access key for the IAM user, if overriding the default
 #      accessKeySecret:
+#
+#      # The region for this instance, if overriding the default
 #      region:
   instance1:
     id: "your-instance-id"
