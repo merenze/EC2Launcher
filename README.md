@@ -2,8 +2,7 @@
 
 EC2 Starter is a Discord bot which starts your stopped EC2 instance on command.
 
-The goal is to allow my friends to start our Minecraft servers at will,
-so they don't have to ask me for help.
+I built this bot to allow my friends to start my Minecraft server from our Discord server.
 With that end in mind, it is meant to be lightweight, so it can run 24/7 with little cost;
 thus, you may find it missing some features you'd like.
 You are welcome to request these, but they may not get implemented.
